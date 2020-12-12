@@ -1,10 +1,12 @@
 package ru.homework.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import ru.homework.framework.utils.MyAllureListener;
 
 
 import java.util.List;
@@ -31,6 +33,7 @@ public class MortgagePage extends BasePage {
     @FindBy(xpath = "//div[@class='_2LdxQuPFoUotOvkdZfv9rR']/div/ul/li")
     private List<WebElement> listOfSums;
 
+    @Step("Заполнение поля {fieldName} значением {value}")
     public MortgagePage fillInputFields(String fieldName, String value) {
         scrollToElementJs(blockInputFields);
         getDriver().switchTo().frame("iFrameResizer0"); //*blockinput
@@ -54,6 +57,7 @@ public class MortgagePage extends BasePage {
         return this;
     }
 
+    @Step("Включение кнопки {nameOfButton}")
     public MortgagePage buttonGetOn(String nameOfButton) throws InterruptedException {
         getDriver().switchTo().frame(blockInputFields);
         for (WebElement element: listOfNameButtons) {
@@ -71,6 +75,7 @@ public class MortgagePage extends BasePage {
         return this;
     }
 
+    @Step("Выключение кнопки {nameOfButton}")
     public MortgagePage buttonGetOff(String nameOfButton) throws InterruptedException {
         getDriver().switchTo().frame(blockInputFields);
         //String currentPercent = getDriver().findElement(By.xpath("//span[text()='Процентная ставка']/../span[@data-e2e-id]/span")).getText();
@@ -89,6 +94,7 @@ public class MortgagePage extends BasePage {
         return this;
     }
 
+    @Step("Проверка суммы {nameOfSumToBeChecked}")
     public MortgagePage checkSum(String nameOfSumToBeChecked) {
         WebElement currentElement = findSumOfElementByName(nameOfSumToBeChecked).findElement(By.xpath("./span[@data-e2e-id]/span"));
         switch (nameOfSumToBeChecked) {
@@ -109,7 +115,7 @@ public class MortgagePage extends BasePage {
                 break;
             case "Процентная ставка":
                 Assert.assertEquals(nameOfSumToBeChecked + " не совпадает",
-                        "11%", currentElement.getText().replaceAll("\\D,", ""));
+                        "11%", currentElement.getText());
                 getDriver().switchTo().defaultContent();
                 break;
             default:
@@ -135,8 +141,6 @@ public class MortgagePage extends BasePage {
         Assert.assertEquals("Поле " + fieldName + " заполнено не верно",
                 value, element.getAttribute("value").replaceAll("\\D", ""));
     }
+    
 
-    private void scrollToBlockInputField(WebElement element) {
-        scrollToElementJs(blockInputFields);
-    }
 }

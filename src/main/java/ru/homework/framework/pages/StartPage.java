@@ -1,5 +1,6 @@
 package ru.homework.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,7 @@ public class StartPage extends BasePage{
     @FindBy(xpath = "//a[contains(@class, 'kitt-top-menu__link_second')]")
     private List<WebElement> menuSubList;
 
-
+    @Step("Переход в главное меню {nameBaseMenu}")
     public StartPage selectBaseMenu(String nameBaseMenu) {
         for (WebElement element: menuBaseList) {
             if (element.getText().equalsIgnoreCase(nameBaseMenu)) {
@@ -27,6 +28,7 @@ public class StartPage extends BasePage{
         return this;
     }
 
+    @Step("Выбор подменю {nameSubMenu}")
     public MortgagePage selectSubMenu(String nameSubMenu) {
         for (WebElement element: menuSubList) {
             if (element.getText().equalsIgnoreCase(nameSubMenu)) {
