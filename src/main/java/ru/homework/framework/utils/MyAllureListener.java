@@ -2,12 +2,18 @@ package ru.homework.framework.utils;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.junit4.AllureJunit4;
+import org.junit.runner.notification.Failure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import ru.homework.framework.managers.DriverManager;
 
 public class MyAllureListener extends AllureJunit4 {
 
+    @Override
+    public void testFailure(Failure failure) {
+        addScreenshot();
+        super.testFailure(failure);
+    }
 
     @Attachment(value = "screenshot", type = "image/png")
     public static byte[] addScreenshot() {

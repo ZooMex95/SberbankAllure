@@ -1,5 +1,6 @@
 package ru.homework.framework.pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -141,6 +142,6 @@ public class MortgagePage extends BasePage {
         Assert.assertEquals("Поле " + fieldName + " заполнено не верно",
                 value, element.getAttribute("value").replaceAll("\\D", ""));
     }
-    
+
 
 }
