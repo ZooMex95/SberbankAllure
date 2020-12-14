@@ -19,7 +19,6 @@ public class SberbankTest extends BaseTest {
         .checkSum("Ежемесячный платеж")
         .checkSum("Необходимый доход")
         .checkSum("Процентная ставка");
-        Thread.sleep(10000);
     }
 
 }
